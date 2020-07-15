@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Add Entry</h2>
+<mat-dialog-content class="mat-typography" [formGroup]="form" >
+    <mat-form-field>
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="dp" formControlName="date">
+        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp></mat-datepicker>
+    </mat-form-field>
+    <br>
+    <mat-form-field> 
+        <mat-label>Time</mat-label>
+        <input matInput type="time" formControlName="time">
+    </mat-form-field>
+    <!-- <br> -->
+    <mat-form-field style="display: none;">
+        <input type="text" matInput [(ngModel)]="latitude" formControlName="latitude">
+    </mat-form-field>
+    <!-- <br> -->
+    <mat-form-field style="display: none;">
+        <input type="text" matInput [(ngModel)]="longitude" formControlName="longitude">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+    <mat-label>Additional Info (optional)</mat-label>
+        <textarea matInput formControlName="addInfo"></textarea>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="warn" >Cancel</button>
+    <button mat-button color="primary" cdkFocusInitial class="mat-raised-button" (click)="save()">Submit</button>
+</mat-dialog-actions>

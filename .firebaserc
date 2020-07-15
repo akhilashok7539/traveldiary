@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "travel-diary-282712": {
+      "hosting": {
+        "travel-diary": [
+          "travel-diary-282712"
+        ]
+      }
+    }
+  }
+}

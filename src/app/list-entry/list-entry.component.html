@@ -1,0 +1,45 @@
+<mat-progress-bar mode="query" *ngIf="enableProgressBar"></mat-progress-bar>
+<p>
+    <mat-toolbar color="primary">
+        <span style="padding-right: 5px;padding-top: 10px;"><mat-icon>timeline</mat-icon></span>
+        <span>Travel Diary</span>
+        <div style="position:absolute; right:10px;">
+            <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Profile Actions">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="authService.signOut()">
+                  <span>Sign Out</span>
+                  <mat-icon style="padding-left: 5px;">exit_to_app</mat-icon>
+                </button>
+            </mat-menu>
+        </div>
+    </mat-toolbar>
+</p>  
+<div style="margin-left: 10px;margin-right: 5px;">
+    <h2>My Timeline</h2>
+    <div *ngIf="entries?.length > 0;">
+        <mgl-timeline [toggle]="toggle" [alternate]="alternate" [side]="side">
+            <mgl-timeline-entry *ngFor="let entry of entries">
+                <mgl-timeline-entry-header>
+                    <app-entry-location [lat]="entry.payload.doc.data().latitude" [long]="entry.payload.doc.data().longitude"></app-entry-location>
+                </mgl-timeline-entry-header>
+                <mgl-timeline-entry-content>
+                    Info : {{entry.payload.doc.data().addInfo}}<br>
+                    Time : {{entry.payload.doc.data().time}} <br>
+                    Date : {{entry.payload.doc.data().date.toDate() | date:'dd/MM/yyyy'}}
+                </mgl-timeline-entry-content>
+                <mgl-timeline-entry-dot 
+                style="background-color: #a78cd4; color: #fff" 
+                [size]="size"
+                [expandAnimationTiming]="dotAnimation ? '200ms ease' : '0ms'"
+                [collapseAnimationTiming]="dotAnimation ? '100ms ease' : '0ms'"
+                ></mgl-timeline-entry-dot>    
+            </mgl-timeline-entry>
+        </mgl-timeline>
+    </div>
+    <div *ngIf="entries?.length == 0">
+        No Entries! Click the <b>+</b> button to add one.
+    </div>
+</div>
+<app-add-btn></app-add-btn>
